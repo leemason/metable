@@ -4,7 +4,7 @@ The ```HasMeta``` trait is where all of the packages public methods are stored.
 
 To use simply:
 
-1. Import the class.
+1. Import the trait.
 2. ```use``` the trait in your Eloquent model
 3. Set the protected ```$metaModel``` property to the fully namespaced class of the to be associated model (this model must use the ```Metable``` trait, which is documented in its own page).
 4. OPTIONAL set the protected ```$metaForeignKey``` to the column name where the relationship id will be stored.*
