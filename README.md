@@ -1,5 +1,7 @@
 ## Laravel Metable Package
 
+[![Build Status](https://travis-ci.org/leemason/metable.svg?branch=master)](https://travis-ci.org/leemason/metable)
+
 The Laravel Eloquent Metable Package is designed specifically for associating "meta" information to an Eloquent model.
 
 ### Installation
