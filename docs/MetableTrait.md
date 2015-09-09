@@ -4,9 +4,9 @@ The ```Metable``` trait provides all of the background value formatting function
 
 This trait can be used with any Eloquent model which will be associated as a meta model to a higher level model.
 
-Using this trait requires that the table for the meta model must contain ```id``` (int, auto increment), ```key``` (string), ```type``` (string), and ```value``` (string) columns.
+Using this trait requires that the table for the meta model must contain ```id``` (int, auto increment), ```key``` (string), ```type``` (string), ```value``` (string), ```$relation_id``` columns (see the database structure docs for full information).
 
-The meta model itself can optionally contain extra attributes, however take note any extra attributes would need to be set on the model seperatley from the ````***Meta()``` helper functions.
+The meta model itself can optionally contain extra attributes, however take note any extra attributes would need to be set on the model seperatley from the ```***Meta()``` helper functions.
 
 The model this trait is used in would also ideally have the ```$fillable``` and ```$casts``` property set like so:
 
