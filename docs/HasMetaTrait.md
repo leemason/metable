@@ -30,13 +30,19 @@ class SomeModel extends Eloquent{
 That's it! All of the meta manipulation functions/properties are now available to you.
 Check them out below:
 
+---
+
 ### meta()
 
 The standard Eloquent relationship function which returns the relation builder
 
+---
+
 ### meta
 
 The standard Eloquent relationship collection fetched by the builder
+
+---
 
 ### getMeta($key = false)
 
@@ -44,17 +50,25 @@ If ```$key``` is false returns the equivalant of ```$this->meta()->get();```.
 If ```$key``` is set and the meta model exists it will return the formatted value.
 Otherwise returns false.
 
+---
+
 ### addMeta($key, $value)
 
 Loads or creates the meta model by ```$key```, sets the ```$value``` and saves to the db.
+
+---
 
 ### updateMeta($key, $value)
 
 Semantic wrapper around the ```addMeta()``` function.
 
+---
+
 ### deleteMeta($key)
 
 Deletes the meta model record and relationship from the db.
+
+---
 
 ### fillMeta(array $meta)
 
