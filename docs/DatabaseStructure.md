@@ -1,6 +1,6 @@
 ## Database Structure
 
-The table structure for the model utilizing the ```HasMeta`` trait is un effected by the meta package and requires no additional columns.
+The table structure for the model utilizing the ```HasMeta``` trait is un effected by the meta package and requires no additional columns.
 
 The table structure for the meta model has only a few specific requirements, they are expressed below using the Laravel Schema class:
 

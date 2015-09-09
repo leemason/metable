@@ -2,6 +2,20 @@
 
 The Laravel Eloquent Metable Package is designed specifically for associating "meta" information to an Eloquent model.
 
+### Installation
+
+Just place require new package for your laravel installation via composer.json
+
+```"leemason/metable": "master"```
+
+Then hit composer update
+
+### Compatability
+
+The Metable package has been developed with Laravel 5.1, i see no reason why it wouldnt work with 5.0 or even 4 but it is only tested for 5.1.
+
+### Introduction
+
 There are many use cases for this, most notably a User model where you may need the ability to assign multiple different types of profile information.
 
 Ideally you would always provide unique columns on your model tables to handle all of the data, but in more dynamic applications this may not always be a viable option.
