@@ -1,5 +1,5 @@
 {
-    "name": "baton-io/metable",
+    "name": "leemason/metable",
     "description": "The Laravel Eloquent Metable Package is designed specifically for associating meta information to an Eloquent model.",
     "license": "MIT",
     "authors": [

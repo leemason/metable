@@ -8,7 +8,7 @@ The Laravel Eloquent Metable Package is designed specifically for associating "m
 
 Just place require new package for your laravel installation via composer.json
 
-```"leemason/metable": "master"```
+```composer require leemason/metable```
 
 Then hit composer update
 
