@@ -1,5 +1,7 @@
 ## Laravel Metable Package
-
+[![Packagist License](https://poser.pugx.org/leemason/metable/license.png)](http://choosealicense.com/licenses/mit/)
+[![Latest Stable Version](https://poser.pugx.org/leemason/metable/version.png)](https://packagist.org/packages/leemason/metable)
+[![Total Downloads](https://poser.pugx.org/leemason/metable/d/total.png)](https://packagist.org/packages/leemason/metable)
 [![Build Status](https://travis-ci.org/leemason/metable.svg?branch=master)](https://travis-ci.org/leemason/metable)
 
 The Laravel Eloquent Metable Package is designed specifically for associating "meta" information to an Eloquent model.
