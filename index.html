@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Metable by leemason</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Metable</h1>
+        <p>The Laravel Eloquent Metable Package is designed specifically for associating &quot;meta&quot; information to an Eloquent model.</p>
+
+        <p class="view"><a href="https://github.com/leemason/metable">View the Project on GitHub <small>leemason/metable</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/leemason/metable/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/leemason/metable/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/leemason/metable">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h2>
+<a id="laravel-metable-package" class="anchor" href="#laravel-metable-package" aria-hidden="true"><span class="octicon octicon-link"></span></a>Laravel Metable Package</h2>
+
+<p><a href="http://choosealicense.com/licenses/mit/"><img src="https://poser.pugx.org/leemason/metable/license.png" alt="Packagist License"></a>
+<a href="https://packagist.org/packages/leemason/metable"><img src="https://poser.pugx.org/leemason/metable/version.png" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/leemason/metable"><img src="https://poser.pugx.org/leemason/metable/d/total.png" alt="Total Downloads"></a>
+<a href="https://travis-ci.org/leemason/metable"><img src="https://travis-ci.org/leemason/metable.svg?branch=master" alt="Build Status"></a></p>
+
+<p>The Laravel Eloquent Metable Package is designed specifically for associating "meta" information to an Eloquent model.</p>
+
+<h3>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h3>
+
+<p>Just place require new package for your laravel installation via composer.json</p>
+
+<pre><code>composer require leemason/metable
+</code></pre>
+
+<p>Then hit composer update</p>
+
+<h3>
+<a id="compatability" class="anchor" href="#compatability" aria-hidden="true"><span class="octicon octicon-link"></span></a>Compatability</h3>
+
+<p>The Metable package has been developed with Laravel 5.1, i see no reason why it wouldnt work with 5.0 or even 4 but it is only tested for 5.1.</p>
+
+<h3>
+<a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h3>
+
+<p>There are many use cases for this, most notably a User model where you may need the ability to assign multiple different types of profile information.</p>
+
+<p>Ideally you would always provide unique columns on your model tables to handle all of the data, but in more dynamic applications this may not always be a viable option.</p>
+
+<p>This is were "meta" information comes into its own.</p>
+
+<p>This package provides the means to associate any kind of data to a model, from ints, float, bools, arrays, to Collections and objects.</p>
+
+<p>Not only does it make it easy to assign this data, it also formats the data for the database and on return usage.</p>
+
+<p>For example a User may need multiple social links, with this package you can create a collection with the data, save right there and then as a Collection (which gets saved as json encoded string).
+Then whenever its retrieved in the future it will be converted back to a Collection.</p>
+
+<p>The "meta" is saved as related Eloquent models with simple key/value access.</p>
+
+<p>In the background the meta model also saved the values "type" for use when returning.</p>
+
+<p>The package comes with 2 traits which adds all the functionality needed and a few helpers to make managing the information even easier.</p>
+
+<p>The <code>Metable</code> trait is used to turn an Eloquent model into a meta model and provides all the background logic for formatting the meta value.</p>
+
+<p>Then the main functionality is accessed through the <code>HasMeta</code> trait.</p>
+
+<p>Here are a few examples (checkout the docs folder for more details information).</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-k">class</span> <span class="pl-en">User</span> <span class="pl-k">extends</span> <span class="pl-e">Eloquent</span>{</span>
+<span class="pl-s1">    <span class="pl-k">use</span> <span class="pl-c1">LeeMason\Metable\HasMeta</span>;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-k">protected</span> <span class="pl-smi">$metaModel</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>UserMeta<span class="pl-pds">'</span></span>;</span>
+<span class="pl-s1">}</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-k">class</span> <span class="pl-en">UserMeta</span> <span class="pl-k">extends</span> <span class="pl-c1">LeeMason\Metable\</span><span class="pl-e">MetaModel</span>{</span>
+<span class="pl-s1">    <span class="pl-c">// By extending the MetaModel we dont have to set the $fillable or $casts properties!</span></span>
+<span class="pl-s1">    <span class="pl-c">// Or you can just use the trait</span></span>
+<span class="pl-s1">}</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-smi">$user</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">User</span>();</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">// uses Eloquent firstOrNew to either create or fetch/update the field by "key"</span></span>
+<span class="pl-s1"><span class="pl-smi">$user</span><span class="pl-k">-&gt;</span>addMeta(<span class="pl-s"><span class="pl-pds">'</span>key<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>value<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">// simple wrapper around addMeta for readability</span></span>
+<span class="pl-s1"><span class="pl-smi">$user</span><span class="pl-k">-&gt;</span>updateMeta(<span class="pl-s"><span class="pl-pds">'</span>collection<span class="pl-pds">'</span></span>, <span class="pl-k">new</span> <span class="pl-c1">Collection</span>([<span class="pl-s"><span class="pl-pds">'</span>collection<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>items<span class="pl-pds">'</span></span>]));</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">// need to save lots of data? not a problem</span></span>
+<span class="pl-s1"><span class="pl-smi">$user</span><span class="pl-k">-&gt;</span>fillMeta([</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">'</span>meta1<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">true</span>,</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">'</span>meta2<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">200</span>,</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">'</span>meta3<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [<span class="pl-c1">1</span>,<span class="pl-c1">2</span>,<span class="pl-c1">3</span>],</span>
+<span class="pl-s1">    <span class="pl-k">....</span></span>
+<span class="pl-s1">]);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">// deleting is easy too</span></span>
+<span class="pl-s1"><span class="pl-smi">$user</span><span class="pl-k">-&gt;</span>deleteMeta(<span class="pl-s"><span class="pl-pds">'</span>meta2<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">// this will return a Collection object</span></span>
+<span class="pl-s1"><span class="pl-smi">$collection</span> <span class="pl-k">=</span> <span class="pl-smi">$user</span><span class="pl-k">-&gt;</span>getMeta(<span class="pl-s"><span class="pl-pds">'</span>collection<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">// and of course, the meta data are related models so can be accessed, or set as such too</span></span>
+<span class="pl-s1"><span class="pl-smi">$user</span><span class="pl-k">-&gt;</span>meta();</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">//or</span></span>
+<span class="pl-s1"><span class="pl-smi">$user</span><span class="pl-k">-&gt;</span><span class="pl-smi">meta</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">//and</span></span>
+<span class="pl-s1"><span class="pl-smi">$meta</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">UserMeta</span>();</span>
+<span class="pl-s1"><span class="pl-smi">$meta</span><span class="pl-k">-&gt;</span><span class="pl-smi">key</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>thekey<span class="pl-pds">'</span></span>;</span>
+<span class="pl-s1"><span class="pl-smi">$meta</span><span class="pl-k">-&gt;</span><span class="pl-smi">value</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>some value<span class="pl-pds">'</span></span>;</span>
+<span class="pl-s1"><span class="pl-smi">$user</span><span class="pl-k">-&gt;</span>meta()<span class="pl-k">-&gt;</span>save(<span class="pl-smi">$meta</span>);</span>
+<span class="pl-s1"></span></pre></div>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/leemason">leemason</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
