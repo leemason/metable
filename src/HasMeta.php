@@ -26,7 +26,7 @@ trait HasMeta
      */
     public function meta()
     {
-        return $this->hasMany($this->metaModel);
+        return $this->hasMany($this->metaModel, $this->getMetaForeignKey());
     }
 
     /**
@@ -35,13 +35,13 @@ trait HasMeta
      * @param bool|false $key
      * @return bool
      */
-    public function getMeta($key = false)
+    public function getMeta($key = false, $model = false)
     {
         if ($key === false) {
             return $this->meta()->get();
         }
         if ($meta = $this->meta()->whereKey($key)->first()) {
-            return $meta->value;
+            return ($model == false) ? $meta->value : $meta;
         }
 
         return false;
